@@ -46,7 +46,7 @@ const mockSessions = [
     status: 'completed',
     created_at: '2025-01-05T00:00:00Z',
   },
- 
+
 ];
 
 const mockCandidates = [
@@ -93,6 +93,15 @@ export const Dashboard = () => {
   const [candidates, setCandidates] = useState(mockCandidates);
   const [selectedSession, setSelectedSession] = useState(null);
 
+  // new container
+
+  const [news, setnews] = useState(false)
+
+  const addContainer = () => {
+    setnews(true)
+
+  }
+
   const handleViewSessionDetails = (session) => {
     setSelectedSession(session);
   };
@@ -107,8 +116,10 @@ export const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <DashboardHeader />
-      
+
       <main className="px-6 py-8">
+        {/* new */}
+        {<New /> && news}
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <StatsCard
@@ -150,13 +161,13 @@ export const Dashboard = () => {
                 <Filter className="w-4 h-4 mr-2" />
                 Filter
               </Button>
-              <Button variant="primary" size="sm">
+              <Button addContainer={addContainer} variant="primary" size="sm">
                 <Plus className="w-4 h-4 mr-2" />
                 New Session
               </Button>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {sessions.map((session) => (
               <TrainingSessionCard
@@ -203,7 +214,7 @@ export const Dashboard = () => {
               </div>
             </div>
           </div>
-          <New/>
+          <New />
         </Card>
       </main>
     </div>
